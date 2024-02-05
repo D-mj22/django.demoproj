@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container text-white text-center">
+    <div>
+      <h5>Your order placed successfully</h5>
+        <h6 class="text-danger"> Thank you </h6>
+        <a href="{% url 'shop:allcat' %}" class="text-primary">Continue shopping</a>
+    </div>
+    <div class="mt-4">
+        {{msg}}
+    </div>
+    <div>
+        <div class="row border border-success" style="margin-bottom:100px;">
+            <div style="text-align:left;">Name of the customer: {{u.username}}</div>
+            <br><br>
+            {% for i in order %}
+            <div class="col-3">
+                <img src="{{i.product.image.url}}" height="150px" width="150px" class="me-3 mb-3">
+            </div>
+            <div class="col-9 w-auto">
+                <table class="table-bordered border border-success text-white">
+                    <tr style="height:50px;">
+                        <td>Product name: {{i.product.name}}</td>
+                        <td>Product price: {{i.product.price}}</td>
+                        <td>Item count: {{i.no_of_items}}</td>
+                        <td>Order date: {{i.order_date}}</td>
+                    </tr>
+                    <tr style="height:50px;">
+                        <td>Delivery address: {{i.address}}</td>
+                        <td>Phone: {{i.phone}}</td>
+                        <td>Delivery status: {{i.delivery_status}}</td>
+                    </tr>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

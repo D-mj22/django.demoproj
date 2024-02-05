@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div>
+    <img src="{{d.image.url}}" class="mt-2" height="500px" width="400px" style="margin-bottom:30px;">
+</div>
+<div class="text-white" id="p1">
+    <h3>{{d.name}}</h3>
+    <p>{{d.desc}}</p>
+    <p>Price: {{d.price}}</p>
+    <p>Stock: {{d.stock}}</p>
+
+    <!-- Depending on if admin or normal user is signed in, detail page display will vary. -->
+
+    {% if user.is_superuser == True %}
+    {% if d.stock == 0 %}
+
+    <h4>Out of Stock </h4>
+    <a href="{% url 'admin:index' %}" class="btn btn-primary">Add stock</a>
+    {% else %}
+    <h4>Product in stock</h4>
+    <a href="{% url 'admin:index' %}" class="btn btn-primary">Add stock</a>
+    {% endif %}
+
+    {% else %}
+
+    {% if d.stock == 0 %}
+    <h4>Out of stock</h4>
+    {% else %}
+    <a href="{% url 'cart:addtocart' d.name %}" class="btn btn-primary">Add to cart</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

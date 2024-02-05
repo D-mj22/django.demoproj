@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h4 class="text-center text-white fw-bold">Order form</h4>
+<div class="container text-white" style="position:absolute; left:100px; top:250px; margin-bottom:10px;">
+    <form method="POST">
+        {% csrf_token %}
+        <label>Address: </label>
+        <textarea rows="2" cols="20" name="a"></textarea>
+        <br><br>
+        <label>Phone: </label>
+        <input type="number" name="p">
+        <br><br>
+        <label>Account number: </label>
+        <input type="number" name="n">
+        <br><br>
+        <input type="submit" class="btn btn-info">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2 class="text-white">Registration Page</h2>
+<center>
+    <form method="POST" enctype="multipart/form-data" class="text-white" style="margin-bottom:80px;">
+        {% csrf_token %}
+        <label>Username:</label>
+        <input type="text" name="u"><br><br>
+        <label>Password:</label>
+        <input type="password" name="p1"><br><br>
+        <label>Confirm password:</label>
+        <input type="password" name="p2"><br><br>
+        <label>Email id:</label>
+        <input type="email" name="e"><br><br>
+        <label>First name:</label>
+        <input type="text" name="f"><br><br>
+        <label>Last name:</label>
+        <input type="text" name="l"><br><br>
+
+        <input type="submit" class="btn btn-secondary">
+    </form>
+</center>
+{% endblock %}
+
+
+

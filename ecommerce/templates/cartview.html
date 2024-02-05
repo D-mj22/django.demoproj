@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="row text-white">
+        <h4 class="text-center">Shopping Cart</h4>
+        <div class="col-sm-7">
+            <table class="table-dark table-bordered border-white">
+                <tr>
+                    <th colspan="5" class="text-center">Cart Items</th>
+                </tr>
+                    {% for i in l %}
+                <tr>
+                    <td><img src="{{i.product.image.url}}" height="150px" width="150px"></td>
+                    <td>{{i.product.name}}</td>
+                    <td style="width:150px;">
+                        <h6>Product ID : {{i.product.id}}</h6>
+                        <h6>Unit price : {{i.product.price}}</h6>
+                        <h6>Quantity : {{i.quantity}}</h6>
+                        <h6>Total price : {{i.product.price}} X {{i.quantity}}</h6>
+                    </td>
+                    <td>
+                        Subtotal:{{i.subtotal}}             <!-- subtotal is a function of class Cart (models.py).-->
+                    </td>
+                    <td style="width:60px;">
+
+                        {% if i.product.stock > 0 %}
+                        <a href="{% url 'cart:addtocart' i.product.name %}"><i class="fa-solid fa-plus"></i></a>
+                        <a href="{% url 'cart:decrementcart' i.product.name %}"><i class="fa-solid fa-minus"></i></a>
+                        <a href="{% url 'cart:delete_cart' i.product.name %}"><i class="fa-solid fa-trash"></i></a>
+
+                        {% else %}
+
+                        <a href="{% url 'cart:decrementcart' i.product.name %}"><i class="fa-solid fa-minus"></i></a>
+                        <a href="{% url 'cart:delete_cart' i.product.name %}"><i class="fa-solid fa-trash"></i></a>
+
+                        {% endif %}
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-sm-5">
+            <table class="table-dark table-bordered border-white">
+                <tr>
+                    <th colspan="6" class="text-center">Check out</th>
+                </tr>
+                <tr>
+                    <td class="text-white me-2" >Total: {{tot}}</td>
+                </tr>
+            </table>
+            <a href="{% url 'cart:orderform' %}" class="btn btn-primary m-2 fs-6">Place order</a>
+            <a href="" class="btn btn-primary m-2 fs-6">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
